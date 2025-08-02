@@ -1,0 +1,94 @@
+{
+  "uuid": "4d5e977d-fe66-4d8f-85d8-12f73a7ccc93",
+  "lastMigration": 33,
+  "name": "Mock ViaCEP",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3000,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "55e32ea3-3934-4ea6-8804-2640be4f74ab",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "ws/08180000/json/",
+      "responses": [
+        {
+          "uuid": "2e4d3ed2-fcee-43d9-889c-a3f2f7ad769f",
+          "body": "{\r\n  \"cep\": \"08180-000\",\r\n  \"logradouro\": \"Rua Exemplo\",\r\n  \"complemento\": \"\",\r\n  \"bairro\": \"Exemplo\",\r\n  \"localidade\": \"São Paulo\",\r\n  \"uf\": \"SP\",\r\n  \"erro\": false\r\n}\r\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "55e32ea3-3934-4ea6-8804-2640be4f74ab"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}
