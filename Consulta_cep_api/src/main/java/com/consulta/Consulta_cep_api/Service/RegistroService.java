@@ -2,7 +2,9 @@ package com.consulta.Consulta_cep_api.Service;
 
 import com.consulta.Consulta_cep_api.Entity.CepReceptor;
 import com.consulta.Consulta_cep_api.Entity.Registro;
+import com.consulta.Consulta_cep_api.Exception.CepNaoEncontradoException;
 import com.consulta.Consulta_cep_api.Repository.RegistroRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -13,9 +15,10 @@ public class RegistroService {
 
     private final RegistroRepository repository;
     private final RestTemplate restTemplate;
-    //private final String BASE_URL = "https://viacep.com.br/ws/"; // Linka a API de CEP
-    private final String BASE_URL = "http://localhost:3000/ws/"; // Linka o Teste do Mockoon
 
+
+    @Value("${cep.api.base-url}")
+    private String baseUrl;
 
     public RegistroService(RegistroRepository repository, RestTemplate restTemplate) {
         this.repository = repository;
@@ -28,15 +31,13 @@ public class RegistroService {
         cep = cep.replaceAll("[^0-9]", "");
 
         // Consulta a API
-        String url = BASE_URL + cep + "/json/";
-       // String url = BASE_URL + cep; //Mockoon
+       String url = baseUrl + cep + "/json/";
 
         CepReceptor cepReceptor = restTemplate.getForObject(url, CepReceptor.class);
 
         // Verifica se deu erro
         if (cepReceptor == null || Boolean.TRUE.equals(cepReceptor.getErro())) {
-            System.err.println("CEP inválido ou não encontrado: " + cep);
-            return null;
+            throw new CepNaoEncontradoException("CEP inválido ou não encontrado: " + cep);
         }
 
         // Cria e salva o registro
@@ -49,8 +50,11 @@ public class RegistroService {
         registro.setLocalidade(cepReceptor.getLocalidade());
         registro.setUf(cepReceptor.getUf());
 
+        System.out.println("Salvando registro: " + registro);
         return repository.saveAndFlush(registro);
     }
+
+
 
 }
 
