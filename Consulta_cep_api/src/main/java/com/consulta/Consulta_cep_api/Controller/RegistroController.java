@@ -24,11 +24,6 @@ public class RegistroController {
         return ResponseEntity.ok(registro);
     }
 
-    @PostMapping
-    public ResponseEntity<Registro> salvarRegistro(@RequestBody Registro registro) {
-        Registro salvo = service.salvarRegistro(registro);
-        return ResponseEntity.status(HttpStatus.CREATED).body(salvo);
-    }
 
 
 
