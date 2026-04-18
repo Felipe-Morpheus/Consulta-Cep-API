@@ -1,5 +1,6 @@
 package com.consulta.Consulta_cep_api.Controller;
 
+import com.consulta.Consulta_cep_api.DTO.RegistroResponseDTO;
 import com.consulta.Consulta_cep_api.Entity.Registro;
 import com.consulta.Consulta_cep_api.Service.RegistroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,8 @@ public class RegistroController {
     }
 
     @GetMapping("/{cep}")
-    public ResponseEntity<Registro> consultarCep(@PathVariable String cep) {
-        Registro registro = service.consultarCep(cep);
+    public ResponseEntity<RegistroResponseDTO> consultarCep(@PathVariable String cep) {
+        RegistroResponseDTO registro = service.consultarCep(cep);
         return ResponseEntity.ok(registro);
     }
 
